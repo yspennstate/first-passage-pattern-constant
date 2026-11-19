@@ -26,7 +26,7 @@
 \email{yitzchak.shmalo@gmail.com}
 \date{November 2026}
 \subjclass[2020]{60G50; 60C05, 60F05, 68R15}
-\keywords{simple random walk, pattern waiting time, first passage, exponential approximation}
+\keywords{simple random walk, waiting time for words, first passage, exponential approximation}
 
 \begin{document}
 \begin{abstract}
@@ -36,7 +36,7 @@ Let $T$ be the first time at which the last $n$ steps of a simple symmetric rand
 
 \section{Introduction}
 
-Let $S_0=0$ and $S_t=\xi_1+\dots+\xi_t$, where the $\xi_i$ are independent and equal to $\pm1$ with probability $1/2$ each. We use the set-up of \cite{Sh26}. A \emph{word} (or pattern) of length $n$ is a nearest-neighbour path $w=(w(0),\dots,w(n))$ with $w(0)=0$. For a set $A$ of words of length $n$, the waiting time
+Let $S_0=0$ and $S_t=\xi_1+\dots+\xi_t$, where the $\xi_i$ are independent and equal to $\pm1$ with probability $1/2$ each. We use the set-up of \cite{Sh26}. A \emph{word} of length $n$ is a nearest-neighbour path $w=(w(0),\dots,w(n))$ with $w(0)=0$. For a set $A$ of words of length $n$, the waiting time
 \[
 T(A)=\min\{t\ge n:\ (S_{t-n+i}-S_{t-n})_{0\le i\le n}\in A\}
 \]
@@ -44,11 +44,11 @@ is the first time at which the last $n$ steps of the walk form a word in $A$. Fo
 \[
 \FP_{n,h}=\{w:\ w(n)=-h,\ w(i)>-h\text{ for }0\le i<n\},\qquad 1\le h\le n,\ h\equiv n\pmod 2.
 \]
-For $h/\sqrt n\to|\lambda|$ with $\lambda<0$ they proved $c\,n\le\EE T(\FP_{n,h})\le c'\,n^{5/4}$ for constants $0<c<c'$ \cite[Theorem~1.8]{PT}, and asked for its exact asymptotics \cite[Open Problem~2.3(2)]{PT} (Open Problem~1(2) in the published version \cite{PTpub}). Peres conjectured that $\EE T$ is of order $n\log n$ \cite[Conjecture~1]{PTpub}. For fixed $\lambda<0$ in this regime there are constants $0<c_1<c_2$ with
+For $\lambda<0$ and $h=|\lambda_n|$, where $\lambda_n$ is the integer of the parity of $n$ obtained by rounding $\lambda\sqrt n$ as in \cite{PT}, they proved $c\,n\le\EE T(\FP_{n,h})\le c'\,n^{5/4}$ for constants $0<c<c'$ \cite[Theorem~1.8(4)]{PT}, and asked for its exact asymptotics \cite[Open Problem~2.3(2)]{PT} (Open Problem~1(2) in the published version \cite{PTpub}). Peres conjectured that $\EE T$ is of order $n\log n$ \cite[Conjecture~1]{PTpub}. For fixed $\lambda<0$ in this regime there are constants $0<c_1<c_2$ with
 \[
 c_1\,n\log n\le\EE T\le c_2\,n\log n
 \]
-for all large $n$, as shown in \cite[Theorem~1.1]{Sh26}; whether $\EE T/(n\log n)$ converges remained open. We determine the constant for every $h$ with $h\to\infty$ and $h/n\to0$, and also when $h$ is fixed and when $h/n\to\delta>0$. The question of Pitman and Tang concerns $h$ of order $\sqrt n$.
+for all large $n$, as shown in \cite[Theorem~1.1 and the paragraph following it]{Sh26}; whether $\EE T/(n\log n)$ converges remained open. There the probability that a block of about $3n/2$ steps contains an occurrence is bounded above through the range of the walk at its descending ladder times \cite[Lemma~4.1]{Sh26} and below through a count of overlaps \cite[Lemma~4.3]{Sh26}; the two bounds come from different arguments, and their constants do not meet. We determine the constant for every $h$ with $h\to\infty$ and $h/n\to0$, and also when $h$ is fixed and when $h/n\to\delta>0$. The question of Pitman and Tang concerns $h$ of order $\sqrt n$.
 
 Write
 \[
@@ -64,7 +64,7 @@ After an occurrence of a word $w\in\FP_{n,h}$, a second occurrence $l<n$ steps l
 \[
 p\,\EE T=\EE_\mu C,\qquad C(w)=1+\sum_{l<n}g_l(-w(l)),
 \]
-where $\mu$ is the law of the first word of $\FP_{n,h}$ to occur (Lemma~\ref{lem:first}). Here $C(w)$ is the column sum belonging to $w$ of the matching matrix used by Pitman and Tang \cite[Section~2.4]{PT}, see \cite[Remark~5.1]{Sh26}. Along a simple symmetric walk $S$ the sum $B_m=\sum_{l\le m}g_l(-S_l)$ has mean $\log m/(2\pi)+O(1)$ \cite[Lemma~3.1]{Sh26}, so $p\,\EE T\sim\log L_*/(2\pi)$ would follow if, under $\mu$, $B_{L_*}$ stayed near its mean and the terms with $l>L_*$ contributed $o(\log L_*)$. The law $\mu$ is not uniform on $\FP_{n,h}$, and the only comparison with the uniform law $U$ on $\FP_{n,h}$ is the density bound $\mu\le p\,\EE T\;U$ of Lemma~\ref{lem:first}, which loses the factor $p\,\EE T$, of order $\log L_*$. The variance of $B_m$ is $O(\log m)$, so Chebyshev's inequality bounds the probability that $|B_m/\log m-1/(2\pi)|>\epsilon$ only by a constant times $1/\log m$, and after multiplication by $\log L_*$ this bound is no longer small. Changing one step $\xi_i$ moves $B_m$ by $O(i^{-1/2})$ (Lemma~\ref{lem:g}), so the bounded-differences inequality of McDiarmid \cite{McD89} gives, for every $\epsilon>0$ and all large $m$,
+where $\mu$ is the law of the first word of $\FP_{n,h}$ to occur (Lemma~\ref{lem:first}). Here $C(w)$ is the column sum belonging to $w$ of the matching matrix used by Pitman and Tang \cite[Section~2.4]{PT}, see \cite[Remark~5.1]{Sh26}. Along a simple symmetric walk $S$ the sum $B_m=\sum_{l\le m}g_l(-S_l)$ has mean $\log m/(2\pi)+O(1)$ (Lemma~\ref{lem:conc}; compare \cite[Lemma~3.1]{Sh26}), so $p\,\EE T\sim\log L_*/(2\pi)$ would follow if, under $\mu$, $B_{L_*}$ stayed near its mean and the terms with $l>L_*$ contributed $o(\log L_*)$. The law $\mu$ is not uniform on $\FP_{n,h}$, and the only comparison with the uniform law $U$ on $\FP_{n,h}$ is the density bound $\mu\le p\,\EE T\;U$ of Lemma~\ref{lem:first}, which loses the factor $p\,\EE T$, of order $\log L_*$. The variance of $B_m$ is $O(\log m)$, so Chebyshev's inequality bounds the probability that $|B_m/\log m-1/(2\pi)|>\epsilon$ only by a constant times $1/\log m$, and after multiplication by $\log L_*$ this bound is no longer small. Changing one step $\xi_i$ moves $B_m$ by $O(i^{-1/2})$ (Lemma~\ref{lem:g}), so the bounded-differences inequality of McDiarmid \cite{McD89} gives, for every $\epsilon>0$ and all large $m$,
 \[
 \PP\Bigl(\Bigl|\frac{B_m}{\log m}-\frac1{2\pi}\Bigr|>\epsilon\Bigr)\le2m^{-c_\epsilon}
 \]
@@ -188,7 +188,7 @@ which is \eqref{eq:first}. As $z\uparrow1$, $(1-z^T)/(1-z)=\sum_{k<T}z^k$ increa
 because $U(w)=1/|\FP|=2^{-n}/p$.
 \end{proof}
 
-\section{Concentration along a free walk}\label{sec:conc}
+\section{Concentration along the simple symmetric walk}\label{sec:conc}
 
 Let $\PP$ denote the law of the simple symmetric walk $S$, and put
 \[
@@ -219,23 +219,23 @@ for large $m$, and $|\EE B_m-\log m/(2\pi)|\le\frac\epsilon2\log m$ for large $m
 
 \section{The uniform law on first-passage words}\label{sec:prefix}
 
-In this section and the next, $n$ and $h$ are as in Theorem~\ref{thm:main}. Put $\delta=h/n$, $m=\lfloor n/2\rfloor$ and
+In this section and the next, $n$ and $h$ are as in Theorem~\ref{thm:main}. Put $\eta=h/n$, $m=\lfloor n/2\rfloor$ and
 \[
-L=\min\bigl(m,\lfloor h^2\rfloor,\lfloor\delta^{-2}\rfloor\bigr).
+L=\min\bigl(m,\lfloor h^2\rfloor,\lfloor\eta^{-2}\rfloor\bigr).
 \]
-Since $h^2\cdot\delta^{-2}=n^2$, we have $L_*\le n$, so $L\ge\min(m,L_*)-1\ge L_*/3$ for large $n$, and $L\le L_*$. Hence $L\to\infty$ and $\log L\sim\log L_*$.
+Since $h^2\cdot\eta^{-2}=n^2$, we have $L_*\le n$, so $L\ge\min(m,L_*)-1\ge L_*/3$ for large $n$, and $L\le L_*$. Hence $L\to\infty$ and $\log L\sim\log L_*$.
 
-Let $Q$ be the law of the walk whose steps are independent and equal to $-1$ with probability $(1+\delta)/2$. Under $Q$ every path ending at $-h$ at time $n$ has the same probability, so $Q$ conditioned on $\{(S_i)_{i\le n}\in\FP\}$ is $U$. For $j\le m$ let $D_j$ be the density of the law of $(S_0,\dots,S_j)$ under $U$ with respect to $Q$. If the prefix has reached $-h$ then $D_j=0$; otherwise, writing $s=S_j$, the remaining $n-j$ steps must form a word of $\FP_{n-j,h+s}$, and the ballot count (Lemma~\ref{lem:ballot}, which applies under $Q$ because $Q$ is uniform given the endpoint) gives
+Let $Q$ be the law of the walk whose steps are independent and equal to $-1$ with probability $(1+\eta)/2$. Under $Q$ every path ending at $-h$ at time $n$ has the same probability, so $Q$ conditioned on $\{(S_i)_{i\le n}\in\FP\}$ is $U$. For $j\le m$ let $D_j$ be the density of the law of $(S_0,\dots,S_j)$ under $U$ with respect to $Q$. If the prefix has reached $-h$ then $D_j=0$; otherwise, writing $s=S_j$, the remaining $n-j$ steps must form a word of $\FP_{n-j,h+s}$, and the ballot count (Lemma~\ref{lem:ballot}, which applies under $Q$ because $Q$ is uniform given the endpoint) gives
 \begin{equation}\label{eq:density}
 D_j=\frac{\frac{h+s}{n-j}\,Q(S_{n-j}=-(h+s))}{\frac hn\,Q(S_n=-h)}.
 \end{equation}
 
 \begin{lemma}\label{lem:D}
-For large $n$ and $j\le m$, $D_j\le K(1+|S_j+\delta j|/h)$, and $\EE_QD_j^2\le K$ whenever $j\le h^2$.
+For large $n$ and $j\le m$, $D_j\le K(1+|S_j+\eta j|/h)$, and $\EE_QD_j^2\le K$ whenever $j\le h^2$.
 \end{lemma}
 
 \begin{proof}
-For large $n$ the step probabilities lie in $[1/4,3/4]$. Stirling's formula at the mode gives $\sup_xQ(S_{n-j}=x)\le K/\sqrt{n-j}\le K'/\sqrt n$, and since $-h$ is the mean of $S_n$ under $Q$, $Q(S_n=-h)\ge c/\sqrt n$. Hence $D_j\le K(h+s)/h$, and $(h+s)/h\le1+|s+\delta j|/h+\delta j/h\le2+|s+\delta j|/h$. Under $Q$, $S_j+\delta j$ is a sum of $j$ centred steps with variance at most $1$, so $\EE_QD_j^2\le K(1+j/h^2)$.
+For large $n$ the step probabilities lie in $[1/4,3/4]$. Stirling's formula at the mode gives $\sup_xQ(S_{n-j}=x)\le K/\sqrt{n-j}\le K'/\sqrt n$, and since $-h$ is the mean of $S_n$ under $Q$, $Q(S_n=-h)\ge c/\sqrt n$. Hence $D_j\le K(h+s)/h$, and $(h+s)/h\le1+|s+\eta j|/h+\eta j/h\le2+|s+\eta j|/h$. Under $Q$, $S_j+\eta j$ is a sum of $j$ centred steps with variance at most $1$, so $\EE_QD_j^2\le K(1+j/h^2)$.
 \end{proof}
 
 \begin{lemma}\label{lem:transfer}
@@ -247,7 +247,7 @@ where $B_L=\sum_{l\le L}g_l(-S_l)$ is evaluated on the word.
 \end{lemma}
 
 \begin{proof}
-Let $A$ be the event in \eqref{eq:transfer}; it depends on the first $L$ steps. The density of $Q$ with respect to $\PP$ on these steps is $\prod_{i\le L}(1-\delta\xi_i)$, whose second moment under $\PP$ is $(1+\delta^2)^L\le e$ because $L\le\delta^{-2}$. By the Cauchy--Schwarz inequality, $Q(A)\le e^{1/2}\PP(A)^{1/2}$. Since $L\le\min(m,h^2)$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(A)=\EE_Q[D_L\mathbf 1_A]\le K^{1/2}Q(A)^{1/2}$. Combine with Lemma~\ref{lem:conc}.
+Let $A$ be the event in \eqref{eq:transfer}; it depends on the first $L$ steps. The density of $Q$ with respect to $\PP$ on these steps is $\prod_{i\le L}(1-\eta\xi_i)$, whose second moment under $\PP$ is $(1+\eta^2)^L\le e$ because $L\le\eta^{-2}$. By the Cauchy--Schwarz inequality, $Q(A)\le e^{1/2}\PP(A)^{1/2}$. Since $L\le\min(m,h^2)$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(A)=\EE_Q[D_L\mathbf 1_A]\le K^{1/2}Q(A)^{1/2}$. Combine with Lemma~\ref{lem:conc}.
 \end{proof}
 
 \begin{lemma}\label{lem:tail}
@@ -259,13 +259,13 @@ The terms with $l>m$ contribute at most $\sum_{m<l<n}K/l\le K$ by Lemma~\ref{lem
 
 Suppose $L=\lfloor h^2\rfloor<m$. On a first-passage word, $S_l>-h$ for $l<n$, so $g_l(-S_l)\le\frac hl\,p_l(-S_l)\le Khl^{-3/2}$, and $\sum_{l>h^2-1}Khl^{-3/2}\le K'$. So $R$ is bounded.
 
-In the remaining case $L=\lfloor\delta^{-2}\rfloor<\min(m,\lfloor h^2\rfloor)$, and in particular $h^2\ge m$ (if $h^2<m$, then $\delta^{-2}=n^2/h^2>n>h^2$ and $L=\lfloor h^2\rfloor$). For $j\ge0$ let $I_j=[2^jL,2^{j+1}L)\cap(L,m]$ and let $E_j$ be the event that $S_l>-\delta l/2$ for some $l\in I_j$. Under $Q$, $M_l=S_l+\delta l$ is a martingale with increments in an interval of length $2$, so by the maximal form of Hoeffding's inequality (Doob's inequality applied to $\exp(\theta M_l-l\theta^2/2)$, optimized over $\theta$),
+In the remaining case $L=\lfloor\eta^{-2}\rfloor<\min(m,\lfloor h^2\rfloor)$, and in particular $h^2\ge m$ (if $h^2<m$, then $\eta^{-2}=n^2/h^2>n>h^2$ and $L=\lfloor h^2\rfloor$). For $j\ge0$ let $I_j=[2^jL,2^{j+1}L)\cap(L,m]$ and let $E_j$ be the event that $S_l>-\eta l/2$ for some $l\in I_j$. Under $Q$, $M_l=S_l+\eta l$ is a martingale with increments in an interval of length $2$, so by the maximal form of Hoeffding's inequality (Doob's inequality applied to $\exp(\theta M_l-l\theta^2/2)$, optimized over $\theta$),
 \[
-Q(E_j)\le Q\Bigl(\max_{l\le2^{j+1}L}M_l\ge\delta2^{j-1}L\Bigr)\le\exp\Bigl(-\frac{\delta^2 4^{j}L^2/4}{2\cdot2^{j+1}L}\Bigr)=\exp\bigl(-\delta^2L\,2^{j}/16\bigr)\le e^{-2^j/32},
+Q(E_j)\le Q\Bigl(\max_{l\le2^{j+1}L}M_l\ge\eta2^{j-1}L\Bigr)\le\exp\Bigl(-\frac{\eta^2 4^{j}L^2/4}{2\cdot2^{j+1}L}\Bigr)=\exp\bigl(-\eta^2L\,2^{j}/16\bigr)\le e^{-2^j/32},
 \]
-since $\delta^2L\ge1-\delta^2\ge1/2$ for large $n$. As $E_j$ depends on the first $m$ steps and $m\le h^2$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(E_j)\le K^{1/2}Q(E_j)^{1/2}\le Ke^{-2^j/64}$. On the complement of $E_j$, $-S_l\ge\delta l/2$ for $l\in I_j$, and Lemma~\ref{lem:g} gives
+since $\eta^2L\ge1-\eta^2\ge1/2$ for large $n$. As $E_j$ depends on the first $m$ steps and $m\le h^2$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(E_j)\le K^{1/2}Q(E_j)^{1/2}\le Ke^{-2^j/64}$. On the complement of $E_j$, $-S_l\ge\eta l/2$ for $l\in I_j$, and Lemma~\ref{lem:g} gives
 \[
-\sum_{l\in I_j}g_l(-S_l)\le\sum_{l\in I_j}\frac Kle^{-c\delta^2l/4}\le K\,e^{-c\delta^2L2^j/4}\le Ke^{-c2^j/8}.
+\sum_{l\in I_j}g_l(-S_l)\le\sum_{l\in I_j}\frac Kle^{-c\eta^2l/4}\le K\,e^{-c\eta^2L2^j/4}\le Ke^{-c2^j/8}.
 \]
 On $E_j$ the same sum is at most $\sum_{l\in I_j}K/l\le K$. Hence, if $E_j$ fails for every $j\ge J$, then $R\le K+K(J+1)+K\sum_je^{-c2^j/8}\le K'(J+1)$. Therefore $U(R>K'(J+1))\le\sum_{j\ge J}Ke^{-2^j/64}\le K''e^{-2^J/64}$, which is stronger than the claim.
 \end{proof}
@@ -328,7 +328,7 @@ The lemma is a finite form of the Poisson clumping heuristic \cite{Ald89}; relat
 
 \section{The end regimes}\label{sec:ends}
 
-Throughout this section $A=\FP_{n,h}$, and $q$ and $r$ are as in Section~\ref{sec:window}. Since $q\le np=h\,p_n(h)$, and $h\,p_n(h)\to0$ both for fixed $h$ (by Stirling's formula) and for $h/n\to\delta>0$ (by the large-deviation bound $p_n(h)\le e^{-\delta'^2n/2}$ with $\delta'=h/n$), Lemma~\ref{lem:window} applies, and $p\,\EE T=(p/r)(r\EE T)$ with $r\EE T\to1$. So it suffices to find the limit of $r/p$, and the exponential law follows from Lemma~\ref{lem:window} as well.
+Throughout this section $A=\FP_{n,h}$, and $q$ and $r$ are as in Section~\ref{sec:window}. Since $q\le np=h\,p_n(h)$, and $h\,p_n(h)\to0$ both for fixed $h$ (by Stirling's formula) and for $h/n\to\delta>0$ (by the large-deviation bound $p_n(h)\le e^{-\eta^2n/2}$ with $\eta=h/n$), Lemma~\ref{lem:window} applies, and $p\,\EE T=(p/r)(r\EE T)$ with $r\EE T\to1$. So it suffices to find the limit of $r/p$, and the exponential law follows from Lemma~\ref{lem:window} as well.
 
 By \eqref{eq:future}, $r/p$ is the probability that there is no occurrence at the times $1,\dots,n$, given an occurrence at time $0$. Given $I_0$, the word $w$ ending at $0$ has law $U$, and the steps after time $0$ form a simple symmetric walk $Z$ independent of $w$; write $\PP_{U\otimes Z}$ for the product of $U$ and the law of $Z$. By the description after \eqref{eq:overlap}, for $0<l<n$ there is an occurrence at time $l$ exactly when $Z$ first reaches $w(l)<0$ at time $l$, that is, when $w$ matches $Z$ at depth $j=-w(l)$ at time $l=\tau_j$. An occurrence at time $n$ has probability $p\to0$. So
 \begin{equation}\label{eq:rp}
@@ -418,7 +418,7 @@ This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI),
 
 \section*{Declaration of competing interest}
 
-The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital. These entities are included in the funding declaration above.
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 
