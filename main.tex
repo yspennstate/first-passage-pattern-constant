@@ -1,0 +1,449 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,booktabs}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\FP}{\mathrm{FP}}
+
+\hypersetup{pdftitle={The exact asymptotics of the waiting time for a first-passage pattern},pdfauthor={Yitzchak Shmalo}}
+
+\title[The constant for a first-passage pattern]{The exact asymptotics of the waiting time for a first-passage pattern}
+\author{Yitzchak Shmalo}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{November 2026}
+\subjclass[2020]{60G50; 60C05, 60F05, 68R15}
+\keywords{simple random walk, pattern waiting time, first passage, exponential approximation}
+
+\begin{document}
+\begin{abstract}
+Let $T$ be the first time at which the last $n$ steps of a simple symmetric random walk form a word that first reaches $-h$ at its last step, and let $p$ be the probability that a given window is such a word. Pitman and Tang asked for the exact asymptotics of the mean $\EE T$ for $h$ of order $\sqrt n$, and its order $n\log n$ was proved in earlier work of the author. We prove that $\EE T\sim\log L_*/(2\pi p)$ with $L_*=\min(h^2,n^2/h^2)$ whenever $h\to\infty$ and $h/n\to0$, and that $T/\EE T$ is asymptotically exponential. For $h\sim|\lambda|\sqrt n$ with $\lambda<0$ this gives $\EE T\sim e^{\lambda^2/2}(2\sqrt{2\pi}\,|\lambda|)^{-1}n\log n$. Say that a walk $X$ matches a simple symmetric walk $Z$ at depth $j$ if $X$ is at $-j$ when $Z$ first reaches $-j$. For fixed $h$ and for $h/n\to\delta>0$ the limit of $p\,\EE T$ is the reciprocal of the probability that $Z$ is never matched by an independent walk $X$, conditioned to stay above $-h$ in the first case and with drift $-\delta$ in the second. For $h=2$ the limit is $3\pi/8$.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+Let $S_0=0$ and $S_t=\xi_1+\dots+\xi_t$, where the $\xi_i$ are independent and equal to $\pm1$ with probability $1/2$ each. We use the set-up of \cite{Sh26}. A \emph{word} (or pattern) of length $n$ is a nearest-neighbour path $w=(w(0),\dots,w(n))$ with $w(0)=0$. For a set $A$ of words of length $n$, the waiting time
+\[
+T(A)=\min\{t\ge n:\ (S_{t-n+i}-S_{t-n})_{0\le i\le n}\in A\}
+\]
+is the first time at which the last $n$ steps of the walk form a word in $A$. For a single word the expectation of $T(A)$ is given by the overlaps of the word with itself, by the work of Li \cite{Li}, Gerber and Li \cite{GL} and Guibas and Odlyzko \cite{GO}. Pitman and Tang \cite{PT} studied $T(A)$ for families $A$ that grow with $n$, among them the first-passage words
+\[
+\FP_{n,h}=\{w:\ w(n)=-h,\ w(i)>-h\text{ for }0\le i<n\},\qquad 1\le h\le n,\ h\equiv n\pmod 2.
+\]
+For $h/\sqrt n\to|\lambda|$ with $\lambda<0$ they proved $c\,n\le\EE T(\FP_{n,h})\le c'\,n^{5/4}$ for constants $0<c<c'$ \cite[Theorem~1.8]{PT}, and asked for its exact asymptotics \cite[Open Problem~2.3(2)]{PT} (Open Problem~1(2) in the published version \cite{PTpub}). Peres conjectured that $\EE T$ is of order $n\log n$ \cite[Conjecture~1]{PTpub}. For fixed $\lambda<0$ in this regime there are constants $0<c_1<c_2$ with
+\[
+c_1\,n\log n\le\EE T\le c_2\,n\log n
+\]
+for all large $n$, as shown in \cite[Theorem~1.1]{Sh26}; whether $\EE T/(n\log n)$ converges remained open. We determine the constant for every $h$ with $h\to\infty$ and $h/n\to0$, and also when $h$ is fixed and when $h/n\to\delta>0$. The question of Pitman and Tang concerns $h$ of order $\sqrt n$.
+
+Write
+\[
+p_l(b)=2^{-l}\binom{l}{(l+b)/2}
+\]
+for the probability that $S_l=b$, with $p_l(b)=0$ when $l+b$ is odd or $|b|>l$, and put $T=T(\FP_{n,h})$ and
+\[
+p=\frac hn\,p_n(h),
+\]
+the probability that a fixed window of $n$ steps is a first-passage word (Lemma~\ref{lem:ballot}), and put $L_*=\min(h^2,n^2/h^2)$. All logarithms are natural.
+
+After an occurrence of a word $w\in\FP_{n,h}$, a second occurrence $l<n$ steps later has conditional probability $g_l(-w(l))$, where $g_l(b)$ is the probability that a simple symmetric walk first reaches $-b$ at time $l$ (so $g_l(b)=0$ for $b\le0$) \cite[Lemma~4.2]{Sh26}. Summing the linear system of Li \cite{Li} and of Gerber and Li \cite{GL} for the waiting time of a set of words over the set gives
+\[
+p\,\EE T=\EE_\mu C,\qquad C(w)=1+\sum_{l<n}g_l(-w(l)),
+\]
+where $\mu$ is the law of the first word of $\FP_{n,h}$ to occur (Lemma~\ref{lem:first}). Here $C(w)$ is the column sum belonging to $w$ of the matching matrix used by Pitman and Tang \cite[Section~2.4]{PT}, see \cite[Remark~5.1]{Sh26}. Along a simple symmetric walk $S$ the sum $B_m=\sum_{l\le m}g_l(-S_l)$ has mean $\log m/(2\pi)+O(1)$ \cite[Lemma~3.1]{Sh26}, so $p\,\EE T\sim\log L_*/(2\pi)$ would follow if, under $\mu$, $B_{L_*}$ stayed near its mean and the terms with $l>L_*$ contributed $o(\log L_*)$. The law $\mu$ is not uniform on $\FP_{n,h}$, and the only comparison with the uniform law $U$ on $\FP_{n,h}$ is the density bound $\mu\le p\,\EE T\;U$ of Lemma~\ref{lem:first}, which loses the factor $p\,\EE T$, of order $\log L_*$. The variance of $B_m$ is $O(\log m)$, so Chebyshev's inequality bounds the probability that $|B_m/\log m-1/(2\pi)|>\epsilon$ only by a constant times $1/\log m$, and after multiplication by $\log L_*$ this bound is no longer small. Changing one step $\xi_i$ moves $B_m$ by $O(i^{-1/2})$ (Lemma~\ref{lem:g}), so the bounded-differences inequality of McDiarmid \cite{McD89} gives, for every $\epsilon>0$ and all large $m$,
+\[
+\PP\Bigl(\Bigl|\frac{B_m}{\log m}-\frac1{2\pi}\Bigr|>\epsilon\Bigr)\le2m^{-c_\epsilon}
+\]
+(Lemma~\ref{lem:conc}), and an exceptional set this small survives the factor $\log L_*$.
+
+\begin{theorem}\label{thm:main}
+Let $n\to\infty$ and $h=h(n)$ with $h\equiv n\pmod2$, $h\to\infty$ and $h/n\to0$, and let $L_*=\min(h^2,n^2/h^2)$. Then
+\[
+\EE T\sim\frac{\log L_*}{2\pi p},\qquad\frac{T}{\EE T}\Longrightarrow\mathrm{Exp}(1).
+\]
+\end{theorem}
+
+Since $p_n(h)\sim\sqrt{2/(\pi n)}\,e^{-h^2/(2n)}$ when $h=O(\sqrt n)$ and $h\equiv n\pmod 2$, the case of $h$ of order $\sqrt n$ reads as follows. It answers the first-passage part of the question of Pitman and Tang.
+
+\begin{corollary}\label{cor:diff}
+Let $\lambda<0$. If $h/\sqrt n\to|\lambda|$, then
+\[
+\EE T\sim\frac{e^{\lambda^2/2}}{2\sqrt{2\pi}\,|\lambda|}\,n\log n.
+\]
+\end{corollary}
+
+For $\lambda=-1$ the constant is $e^{1/2}/(2\sqrt{2\pi})=0.3289\dots$. The convergence is slow: in Table~\ref{tab:num} the point estimates of the difference $p\,\EE T-\log L_*/(2\pi)$ lie between $1.2$ and $1.6$ for $10\le n\le10^6$.
+
+The two regimes not covered by Theorem~\ref{thm:main}, bounded $h$ and $h/n\to\delta>0$, are called the end regimes below. Every sequence $(n,h)$ has a subsequence in one of the three regimes. Let $X$ and $Z$ be independent random walks started at $0$, with $Z$ simple symmetric, let $\tau_j=\min\{l:Z_l=-j\}$, and say that $X$ \emph{matches} $Z$ at depth $j\ge1$ if $X_{\tau_j}=-j$.
+
+\begin{theorem}\label{thm:ends}
+\begin{enumerate}
+\item[(a)] Let $h\ge1$ be fixed and let $n\to\infty$ with $n\equiv h\pmod2$. Then $p\,\EE T\to1/\rho_h$ and $T/\EE T\Rightarrow\mathrm{Exp}(1)$, where $\rho_h$ is the probability that $Z$ is not matched by the simple symmetric walk $X$ conditioned to stay above $-h$ (the Doob transform of the simple symmetric walk killed at $-h$ by the harmonic function $x+h$). The constants satisfy $\rho_1=1$ and
+\begin{equation}\label{eq:rho}
+\rho_h=1-\sum_{j=1}^{h-1}H_h(j)\,\rho_{h-j},\qquad H_h(j)=\frac{h-j}{h}\sum_{l\ge1}\frac jl\,p_l(j)\bigl(p_l(j)-p_l(2h-j)\bigr),
+\end{equation}
+and $\rho_2=8/(3\pi)$.
+\item[(b)] Let $h/n\to\delta\in(0,1]$. Then $p\,\EE T\to G_\delta$ and $T/\EE T\Rightarrow\mathrm{Exp}(1)$, where $1/G_\delta$ is the probability that $Z$ is not matched by the random walk $X$ with steps $-1$ and $+1$ of probabilities $(1+\delta)/2$ and $(1-\delta)/2$, and
+\begin{equation}\label{eq:G}
+G_\delta=1+\sum_{l\ge1}\sum_{j\ge1}\PP(X_l=-j)\,\frac jl\,p_l(j).
+\end{equation}
+In particular $G_1=2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}\label{cor:match}
+As $h\to\infty$, $\rho_h\log h\to\pi$, and as $\delta\downarrow0$, $G_\delta/\log(1/\delta)\to1/\pi$.
+\end{corollary}
+
+So $1/\rho_h\sim\log(h^2)/(2\pi)$ and $G_\delta\sim\log(\delta^{-2})/(2\pi)$, which are the values of $\log L_*/(2\pi)$ at the two ends of the range of Theorem~\ref{thm:main}.
+
+\subsection*{Method}
+An exponential tilt, under which $U$ is a conditioned walk, and a ballot formula carry the bound of Lemma~\ref{lem:conc} to $U$ up to the length $L_*$, and under $U$ the remainder $\sum_{L_*<l<n}g_l(-w(l))$ has an exponential tail (Lemmas~\ref{lem:transfer} and~\ref{lem:tail}). For the end regimes we use instead a comparison, valid for any family of words in an i.i.d.\ sequence, between $\EE T$ and the intensity $r$ of isolated occurrences, the occurrences preceded by $n$ non-occurrences (Lemma~\ref{lem:window}).
+
+Section~\ref{sec:prelim} collects estimates for $g_l$. Section~\ref{sec:first} proves the identity $p\,\EE T=\EE_\mu C$ and the density bound, Section~\ref{sec:conc} the concentration, Section~\ref{sec:prefix} the transfer and the tail, and Section~\ref{sec:proof} Theorem~\ref{thm:main}. Section~\ref{sec:window} proves the comparison lemma, Section~\ref{sec:ends} Theorem~\ref{thm:ends} and Corollary~\ref{cor:match}, together with an exact recursion for the intensity, and Section~\ref{sec:numerics} gives numerical values.
+
+\section{First-passage probabilities}\label{sec:prelim}
+
+For $l\ge1$ and an integer $b$ put
+\[
+g_l(b)=\frac bl\,p_l(b)\quad(b>0),\qquad g_l(b)=0\quad(b\le0).
+\]
+In \cite[Lemma~2.1]{Sh26} this function is denoted $f_l(b)$.
+
+\begin{lemma}\label{lem:ballot}
+For $b\ge1$, $g_l(b)$ is the probability that a simple symmetric walk first reaches $-b$ at time $l$, and
+\begin{equation}\label{eq:diff}
+g_l(b)=\tfrac12\bigl(p_{l-1}(b-1)-p_{l-1}(b+1)\bigr).
+\end{equation}
+In particular $\PP(\text{a fixed window of length $n$ is in }\FP_{n,h})=g_n(h)=p$.
+\end{lemma}
+
+\begin{proof}
+This is \cite[Lemma~2.1]{Sh26}; the identity \eqref{eq:diff} is the reflection step of its proof.
+\end{proof}
+
+Define $d_l(b)=\frac12(p_{l-1}(b-1)-p_{l-1}(b+1))$ for all integers $b$. Since $p_{l-1}(x)$ is even in $x$ and non-increasing in $|x|$ on its parity class, $d_l(b)\le0$ for $b\le0$, so $g_l=\max(d_l,0)$ on the whole lattice.
+
+\begin{lemma}\label{lem:g}
+There are absolute constants $c,K>0$ such that for all $l\ge1$ and all integers $b$,
+\[
+0\le g_l(b)\le\frac Kl\,e^{-cb^2/l},\qquad |g_l(b+2)-g_l(b)|\le K\,l^{-3/2}.
+\]
+\end{lemma}
+
+\begin{proof}
+For the first bound let $b>0$. By \cite[(2.3)]{Sh26}, $p_l(b)\le Kl^{-1/2}e^{-b^2/(4l)}$, so $g_l(b)\le K(b/\sqrt l)e^{-b^2/(4l)}\,l^{-1}\le Kl^{-1}e^{-cb^2/l}$ with $c=1/8$.
+
+For the second bound, $|g_l(b+2)-g_l(b)|\le|d_l(b+2)-d_l(b)|$ because $x\mapsto\max(x,0)$ is $1$-Lipschitz. By Fourier inversion, $p_m(x)=\frac1{2\pi}\int_{-\pi}^{\pi}\cos^mt\,e^{-ixt}\,dt$ for every integer $x$, and therefore
+\[
+d_l(b+2)-d_l(b)=\tfrac12\bigl(2p_{l-1}(b+1)-p_{l-1}(b-1)-p_{l-1}(b+3)\bigr)=\frac1{2\pi}\int_{-\pi}^{\pi}\cos^{l-1}t\,e^{-i(b+1)t}\,2\sin^2t\,dt.
+\]
+The absolute value is at most $\frac1\pi\int_{-\pi}^{\pi}\sin^2t\,|\cos t|^{l-1}dt=\frac4\pi\int_0^{\pi/2}\sin^2t\cos^{l-1}t\,dt$. For $l\ge2$, using $\sin t\le t$ and $\cos t\le e^{-t^2/2}$ on $[0,\pi/2]$, this is at most $\frac4\pi\int_0^\infty t^2e^{-(l-1)t^2/2}dt=\frac{2\sqrt{2\pi}}{\pi}(l-1)^{-3/2}\le Kl^{-3/2}$. For $l=1$ the bound is trivial.
+\end{proof}
+
+\section{The first occurrence}\label{sec:first}
+
+Fix $n$ and $h$ and abbreviate $\FP=\FP_{n,h}$. Let $U$ be the uniform law on $\FP$, let $W$ be the word formed by the steps $T-n+1,\dots,T$, and let $\mu$ be the law of $W$. For a word $w$ write $S_l=w(l)$ and
+\[
+C_z(w)=1+\sum_{l=1}^{n-1}z^l\,g_l(-S_l),\qquad C=C_1,\qquad\alpha=p\,\EE T.
+\]
+
+Consider a word $w\in\FP$ occupying the steps $t-n+1,\dots,t$, and let $0<l<n$. By \cite[Lemma~4.2]{Sh26},
+\begin{equation}\label{eq:overlap}
+\PP(\text{the window ending at $t+l$ is in }\FP\mid w)=g_l(-w(l)),\qquad 0<l<n,
+\end{equation}
+where the conditioning is on the steps $t-n+1,\dots,t$ forming $w$. More precisely, the window ending at $t+l$ is in $\FP$ exactly when $w(l)<0$ and the walk after time $t$ first reaches $w(l)$ at time $t+l$. The count of such completions also appears in \cite[(2.21)]{PT}.
+
+\begin{lemma}\label{lem:first}
+$\EE T\le n/p<\infty$. For $0<z<1$,
+\begin{equation}\label{eq:first}
+\frac{p\,z^n\bigl(1-\EE z^T\bigr)}{1-z}=\EE\bigl[z^T\,C_z(W)\bigr].
+\end{equation}
+Moreover $\alpha=\EE_\mu C$ and $\mu(w)\le\alpha\,U(w)$ for every $w\in\FP$.
+\end{lemma}
+
+\begin{proof}
+The disjoint windows ending at $n,2n,3n,\dots$ are independent and each is in $\FP$ with probability $p$, so $\EE T\le n/p$. Write $\mathbf 1_E$, or $\mathbf 1\{E\}$, for the indicator of an event $E$, and let $N_z=\sum_{t\ge n}z^t\mathbf 1\{\text{the window ending at $t$ is in }\FP\}$. Then $\EE N_z=p\,z^n/(1-z)$. Every term of $N_z$ has $t\ge T$, and $T$ is a stopping time. Given the walk up to time $T$, the window ending at $T+l$ is in $\FP$ with conditional probability $1$ for $l=0$, $g_l(-W(l))$ for $0<l<n$ by \eqref{eq:overlap}, and $p$ for $l\ge n$, since it then consists of steps after $T$. Hence
+\[
+\EE N_z=\EE\bigl[z^TC_z(W)\bigr]+\EE\bigl[z^T\bigr]\frac{p\,z^n}{1-z},
+\]
+which is \eqref{eq:first}. As $z\uparrow1$, $(1-z^T)/(1-z)=\sum_{k<T}z^k$ increases to $T$, so the left side of \eqref{eq:first} tends to $p\,\EE T$ by monotone convergence, and the right side tends to $\EE C(W)$. For the last claim, $T=s$ and $W=w$ require that $T>s-n$ and that the steps $s-n+1,\dots,s$ form $w$. These two events are independent, so
+\[
+\mu(w)\le\sum_{s\ge n}\PP(T>s-n)\,2^{-n}=2^{-n}\EE T=\alpha\,U(w),
+\]
+because $U(w)=1/|\FP|=2^{-n}/p$.
+\end{proof}
+
+\section{Concentration along a free walk}\label{sec:conc}
+
+Let $\PP$ denote the law of the simple symmetric walk $S$, and put
+\[
+B_m=\sum_{l=1}^mg_l(-S_l).
+\]
+
+\begin{lemma}\label{lem:conc}
+$\EE B_m=\log m/(2\pi)+O(1)$, and for every $\epsilon>0$ there is $c_\epsilon>0$ such that for all large $m$
+\begin{equation}\label{eq:conc}
+\PP\Bigl(\Bigl|\frac{B_m}{\log m}-\frac1{2\pi}\Bigr|>\epsilon\Bigr)\le2m^{-c_\epsilon}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By symmetry of $p_l$,
+\[
+\EE g_l(-S_l)=\sum_{b>0}\frac bl\,p_l(b)^2=4^{-l}\binom{l-1}{\lfloor(l-1)/2\rfloor}^2=\frac1{2\pi l}+O(l^{-2});
+\]
+the middle equality is a telescoping sum, shown in \cite[Lemma~3.1]{Sh26}, and the last follows from Stirling's formula. Summing over $l\le m$ gives the first claim.
+
+Changing $\xi_i$ changes $S_l$ by $\pm2$ for $l\ge i$ and leaves it unchanged for $l<i$. By Lemma~\ref{lem:g} it changes $B_m$ by at most $c_i=K\sum_{l\ge i}l^{-3/2}\le K'i^{-1/2}$. Since $\sum_{i\le m}c_i^2\le K''(1+\log m)$, the bounded-differences inequality \cite{McD89} gives
+\[
+\PP\bigl(|B_m-\EE B_m|>\tfrac\epsilon2\log m\bigr)\le2\exp\Bigl(-\frac{\epsilon^2\log^2m}{2K''(1+\log m)}\Bigr)\le2m^{-c_\epsilon}
+\]
+for large $m$, and $|\EE B_m-\log m/(2\pi)|\le\frac\epsilon2\log m$ for large $m$.
+\end{proof}
+
+
+\section{The uniform law on first-passage words}\label{sec:prefix}
+
+In this section and the next, $n$ and $h$ are as in Theorem~\ref{thm:main}. Put $\delta=h/n$, $m=\lfloor n/2\rfloor$ and
+\[
+L=\min\bigl(m,\lfloor h^2\rfloor,\lfloor\delta^{-2}\rfloor\bigr).
+\]
+Since $h^2\cdot\delta^{-2}=n^2$, we have $L_*\le n$, so $L\ge\min(m,L_*)-1\ge L_*/3$ for large $n$, and $L\le L_*$. Hence $L\to\infty$ and $\log L\sim\log L_*$.
+
+Let $Q$ be the law of the walk whose steps are independent and equal to $-1$ with probability $(1+\delta)/2$. Under $Q$ every path ending at $-h$ at time $n$ has the same probability, so $Q$ conditioned on $\{(S_i)_{i\le n}\in\FP\}$ is $U$. For $j\le m$ let $D_j$ be the density of the law of $(S_0,\dots,S_j)$ under $U$ with respect to $Q$. If the prefix has reached $-h$ then $D_j=0$; otherwise, writing $s=S_j$, the remaining $n-j$ steps must form a word of $\FP_{n-j,h+s}$, and the ballot count (Lemma~\ref{lem:ballot}, which applies under $Q$ because $Q$ is uniform given the endpoint) gives
+\begin{equation}\label{eq:density}
+D_j=\frac{\frac{h+s}{n-j}\,Q(S_{n-j}=-(h+s))}{\frac hn\,Q(S_n=-h)}.
+\end{equation}
+
+\begin{lemma}\label{lem:D}
+For large $n$ and $j\le m$, $D_j\le K(1+|S_j+\delta j|/h)$, and $\EE_QD_j^2\le K$ whenever $j\le h^2$.
+\end{lemma}
+
+\begin{proof}
+For large $n$ the step probabilities lie in $[1/4,3/4]$. Stirling's formula at the mode gives $\sup_xQ(S_{n-j}=x)\le K/\sqrt{n-j}\le K'/\sqrt n$, and since $-h$ is the mean of $S_n$ under $Q$, $Q(S_n=-h)\ge c/\sqrt n$. Hence $D_j\le K(h+s)/h$, and $(h+s)/h\le1+|s+\delta j|/h+\delta j/h\le2+|s+\delta j|/h$. Under $Q$, $S_j+\delta j$ is a sum of $j$ centred steps with variance at most $1$, so $\EE_QD_j^2\le K(1+j/h^2)$.
+\end{proof}
+
+\begin{lemma}\label{lem:transfer}
+For every $\epsilon>0$ there are $K_\epsilon,c'_\epsilon>0$ such that for large $n$
+\begin{equation}\label{eq:transfer}
+U\Bigl(\Bigl|\frac{B_L}{\log L}-\frac1{2\pi}\Bigr|>\epsilon\Bigr)\le K_\epsilon L^{-c'_\epsilon},
+\end{equation}
+where $B_L=\sum_{l\le L}g_l(-S_l)$ is evaluated on the word.
+\end{lemma}
+
+\begin{proof}
+Let $A$ be the event in \eqref{eq:transfer}; it depends on the first $L$ steps. The density of $Q$ with respect to $\PP$ on these steps is $\prod_{i\le L}(1-\delta\xi_i)$, whose second moment under $\PP$ is $(1+\delta^2)^L\le e$ because $L\le\delta^{-2}$. By the Cauchy--Schwarz inequality, $Q(A)\le e^{1/2}\PP(A)^{1/2}$. Since $L\le\min(m,h^2)$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(A)=\EE_Q[D_L\mathbf 1_A]\le K^{1/2}Q(A)^{1/2}$. Combine with Lemma~\ref{lem:conc}.
+\end{proof}
+
+\begin{lemma}\label{lem:tail}
+Let $R=\sum_{l=L+1}^{n-1}g_l(-S_l)$. There are $K,c>0$ such that for large $n$ and all $t\ge0$, $U(R>t)\le Ke^{-ct}$.
+\end{lemma}
+
+\begin{proof}
+The terms with $l>m$ contribute at most $\sum_{m<l<n}K/l\le K$ by Lemma~\ref{lem:g}. This settles the case $L=m$. Below, the sum runs over $L<l\le m$.
+
+Suppose $L=\lfloor h^2\rfloor<m$. On a first-passage word, $S_l>-h$ for $l<n$, so $g_l(-S_l)\le\frac hl\,p_l(-S_l)\le Khl^{-3/2}$, and $\sum_{l>h^2-1}Khl^{-3/2}\le K'$. So $R$ is bounded.
+
+In the remaining case $L=\lfloor\delta^{-2}\rfloor<\min(m,\lfloor h^2\rfloor)$, and in particular $h^2\ge m$ (if $h^2<m$, then $\delta^{-2}=n^2/h^2>n>h^2$ and $L=\lfloor h^2\rfloor$). For $j\ge0$ let $I_j=[2^jL,2^{j+1}L)\cap(L,m]$ and let $E_j$ be the event that $S_l>-\delta l/2$ for some $l\in I_j$. Under $Q$, $M_l=S_l+\delta l$ is a martingale with increments in an interval of length $2$, so by the maximal form of Hoeffding's inequality (Doob's inequality applied to $\exp(\theta M_l-l\theta^2/2)$, optimized over $\theta$),
+\[
+Q(E_j)\le Q\Bigl(\max_{l\le2^{j+1}L}M_l\ge\delta2^{j-1}L\Bigr)\le\exp\Bigl(-\frac{\delta^2 4^{j}L^2/4}{2\cdot2^{j+1}L}\Bigr)=\exp\bigl(-\delta^2L\,2^{j}/16\bigr)\le e^{-2^j/32},
+\]
+since $\delta^2L\ge1-\delta^2\ge1/2$ for large $n$. As $E_j$ depends on the first $m$ steps and $m\le h^2$, Lemma~\ref{lem:D} and the Cauchy--Schwarz inequality give $U(E_j)\le K^{1/2}Q(E_j)^{1/2}\le Ke^{-2^j/64}$. On the complement of $E_j$, $-S_l\ge\delta l/2$ for $l\in I_j$, and Lemma~\ref{lem:g} gives
+\[
+\sum_{l\in I_j}g_l(-S_l)\le\sum_{l\in I_j}\frac Kle^{-c\delta^2l/4}\le K\,e^{-c\delta^2L2^j/4}\le Ke^{-c2^j/8}.
+\]
+On $E_j$ the same sum is at most $\sum_{l\in I_j}K/l\le K$. Hence, if $E_j$ fails for every $j\ge J$, then $R\le K+K(J+1)+K\sum_je^{-c2^j/8}\le K'(J+1)$. Therefore $U(R>K'(J+1))\le\sum_{j\ge J}Ke^{-2^j/64}\le K''e^{-2^J/64}$, which is stronger than the claim.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
+
+On a first-passage word, $C=1+B_L+R$ with $B_L\le\sum_{l\le L}K/l\le K(1+\log L)$. For $u>0$, $R\le u+(R-u)_+$, and by Lemma~\ref{lem:first}, $\EE_\mu(R-u)_+\le\alpha\EE_U(R-u)_+$. So
+\[
+\alpha=\EE_\mu C\le1+K(1+\log L)+u+\alpha\,\EE_U(R-u)_+.
+\]
+By Lemma~\ref{lem:tail}, $\EE_U(R-u)_+\le1/2$ for a fixed large $u$, and so $\alpha=O(\log L)$.
+
+By Lemmas~\ref{lem:first} and~\ref{lem:transfer}, the $\mu$-probability of the event in \eqref{eq:transfer} is at most $\alpha K_\epsilon L^{-c'_\epsilon}\to0$, and $B_L/\log L$ is bounded, so $B_L/\log L\to1/(2\pi)$ in $L^1(\mu)$. Next, $\mu(R>t)\le\min(1,K\alpha e^{-ct})$, and integrating in $t$ gives $\EE_\mu R=O(1+\log(1+\alpha))=o(\log L)$. Hence
+\begin{equation}\label{eq:L1}
+\frac C{\log L}\to\frac1{2\pi}\quad\text{in }L^1(\mu),\qquad\alpha=\EE_\mu C\sim\frac{\log L}{2\pi}\sim\frac{\log L_*}{2\pi}.
+\end{equation}
+This is the first claim. For the second, note $np=n\,g_n(h)\le K$ by Lemma~\ref{lem:g}, so $n/\EE T=np/\alpha\to0$. Fix $s>0$ and put $z=e^{-s/\EE T}$. Then $p/(\alpha(1-z))=1/(\EE T(1-z))\to1/s$ and $z^n\to1$. Since $z^nC\le C_z\le C$ and $C/\alpha\to1$ in $L^1(\mu)$ by \eqref{eq:L1},
+\[
+\Bigl|\frac{\EE[z^TC_z(W)]}{\alpha}-\EE z^T\Bigr|\le\EE_\mu\Bigl|\frac C\alpha-1\Bigr|+(1-z^n)\frac{\EE_\mu C}{\alpha}\to0.
+\]
+Dividing \eqref{eq:first} by $\alpha$ therefore gives $(1-\EE z^T)/s=\EE z^T+o(1)$, that is, $\EE e^{-sT/\EE T}\to1/(1+s)$. By the continuity theorem for Laplace transforms, $T/\EE T\Rightarrow\mathrm{Exp}(1)$.
+
+Corollary~\ref{cor:diff} follows from the local limit theorem $p_n(h)\sim\sqrt{2/(\pi n)}\,e^{-h^2/(2n)}$ on the parity class of $n$, which gives $p\sim|\lambda|\sqrt{2/\pi}\,e^{-\lambda^2/2}/n$, and from $\log L_*\sim\log n$.
+
+\section{Isolated occurrences}\label{sec:window}
+
+This section concerns an arbitrary nonempty set $A$ of words of length $n$. Let $(\xi_t)_{t\in\Z}$ be i.i.d.\ fair signs, let $I_t$ be the event that the window $\xi_{t-n+1},\dots,\xi_t$ forms a word in $A$, and put
+\[
+q=\PP\Bigl(\bigcup_{t=1}^nI_t\Bigr),\qquad r=\PP\bigl(I_0\cap I_{-1}^c\cap\dots\cap I_{-n}^c\bigr).
+\]
+Since $\PP(I_0\cap I_{-1}^c\cap\dots\cap I_{-n}^c)$ and $\PP(I_0\cap I_1^c\cap\dots\cap I_n^c)$ are both equal to the probability of $n$ consecutive non-occurrences minus that of $n+1$, stationarity gives
+\begin{equation}\label{eq:future}
+r=\PP\bigl(I_0\cap I_1^c\cap\dots\cap I_n^c\bigr).
+\end{equation}
+Let $T$ be the waiting time for $A$ in the one-sided sequence $\xi_1,\xi_2,\dots$, as in the introduction.
+
+\begin{lemma}\label{lem:window}
+$1-q\le r\,\EE T\le1$. For $0<z<1$,
+\begin{equation}\label{eq:windowz}
+\Bigl|\frac{r\,z^{2n}(1-\EE z^T)}{1-z}-\EE z^T\Bigr|\le q.
+\end{equation}
+Moreover $nr\le q$. If $q\to0$ along a sequence of sets $A$, then $r\,\EE T\to1$ and $rT\Rightarrow\mathrm{Exp}(1)$.
+\end{lemma}
+
+\begin{proof}
+For $t\ge2n$ let $J_t$ be the event, in the one-sided sequence, that the window ending at $t$ is in $A$ and the windows ending at $t-1,\dots,t-n$ are not. It depends on $\xi_{t-2n+1},\dots,\xi_t$, has probability $r$, and is independent of $\{T>t-2n\}$. Hence
+\[
+\EE M_z=r\,z^{2n}\sum_{k\ge0}z^k\PP(T>k)=\frac{r\,z^{2n}(1-\EE z^T)}{1-z},\qquad M_z=\sum_{t\ge2n}z^t\mathbf 1\{T>t-2n\}\mathbf 1_{J_t}.
+\]
+We count the terms of $M_z$ on each path. Each term has $T\le t<T+2n$. The term $t=T$ is present exactly when $T\ge2n$, since the windows ending at $T-1,\dots,T-n$ are then windows of the one-sided sequence, and none of them is in $A$ by the definition of $T$. Any other term has $T<t-n$, because $J_t$ excludes an occurrence at $T$ when $t-n\le T<t$; so $T+n<t<T+2n$. Two events $J_t$ and $J_{t'}$ with $0<t'-t\le n$ are disjoint, so there is at most one such term. It requires an occurrence ending at one of fewer than $n$ times in $(T+n,T+2n)$, in a window that consists of steps after $T$; given the walk up to $T$, this has probability at most $q$. Hence
+\[
+\EE z^T-\EE\bigl[z^T\mathbf 1\{T<2n\}\bigr]\le\EE M_z\le\EE z^T-\EE\bigl[z^T\mathbf 1\{T<2n\}\bigr]+q,
+\]
+and $\PP(T<2n)=q$, because $T<2n$ means an occurrence ending at one of the $n$ times $n,\dots,2n-1$. This proves \eqref{eq:windowz}, and letting $z\uparrow1$ (monotone convergence) gives $1-q\le r\EE T\le1$.
+
+In the two-sided sequence, the events $J'_t=I_t\cap I_{t-1}^c\cap\dots\cap I_{t-n}^c$, $1\le t\le n$, are disjoint and contained in $\bigcup_{t\le n}I_t$, so $nr\le q$. If $q\to0$, then $r\EE T\to1$, and for fixed $s>0$ and $z=e^{-sr}$ we have $(1-z)/r\to s$ and $z^{2n}=e^{-2snr}\to1$, so \eqref{eq:windowz} gives $(1-\EE e^{-srT})/s-\EE e^{-srT}\to0$, that is, $\EE e^{-srT}\to1/(1+s)$.
+\end{proof}
+
+The lemma is a finite form of the Poisson clumping heuristic \cite{Ald89}; related estimates for hitting times of cylinder sets are in \cite{AS11}, and Poisson approximation for isolated occurrences of rare words by the Chen--Stein method is developed in \cite{AGG90}.
+
+\section{The end regimes}\label{sec:ends}
+
+Throughout this section $A=\FP_{n,h}$, and $q$ and $r$ are as in Section~\ref{sec:window}. Since $q\le np=h\,p_n(h)$, and $h\,p_n(h)\to0$ both for fixed $h$ (by Stirling's formula) and for $h/n\to\delta>0$ (by the large-deviation bound $p_n(h)\le e^{-\delta'^2n/2}$ with $\delta'=h/n$), Lemma~\ref{lem:window} applies, and $p\,\EE T=(p/r)(r\EE T)$ with $r\EE T\to1$. So it suffices to find the limit of $r/p$, and the exponential law follows from Lemma~\ref{lem:window} as well.
+
+By \eqref{eq:future}, $r/p$ is the probability that there is no occurrence at the times $1,\dots,n$, given an occurrence at time $0$. Given $I_0$, the word $w$ ending at $0$ has law $U$, and the steps after time $0$ form a simple symmetric walk $Z$ independent of $w$; write $\PP_{U\otimes Z}$ for the product of $U$ and the law of $Z$. By the description after \eqref{eq:overlap}, for $0<l<n$ there is an occurrence at time $l$ exactly when $Z$ first reaches $w(l)<0$ at time $l$, that is, when $w$ matches $Z$ at depth $j=-w(l)$ at time $l=\tau_j$. An occurrence at time $n$ has probability $p\to0$. So
+\begin{equation}\label{eq:rp}
+\frac rp=\PP_{U\otimes Z}\bigl(w\text{ does not match $Z$ at any time }l<n\bigr)+o(1).
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ends}(a)]
+Let $h$ be fixed. For a fixed $k$ and a fixed prefix $(w(0),\dots,w(k))$ staying above $-h$ and ending at $s$, the ballot count used for \eqref{eq:density}, applied with $Q$ the law of $S$, gives
+\[
+U(\text{prefix})=2^{-k}\,\frac{n(h+s)}{h(n-k)}\,\frac{p_{n-k}(h+s)}{p_n(h)}\to2^{-k}\,\frac{h+s}h
+\]
+by the local limit theorem. The right side is the probability of the prefix under the conditioned walk $X$ of the theorem. Hence the probability of no match at the times $l<k$ converges to the corresponding probability for $X$ and $Z$. On the other hand, for every first-passage word, $-w(l)<h$ for $0<l<n$, so the conditional probability of a match at some time in $[k,n)$, given $w$, is at most $\sum_{l\ge k}g_l(-w(l))\le\sum_{l\ge k}Khl^{-3/2}\le K'h/\sqrt k$. The same bound holds for $X$. Letting $n\to\infty$ and then $k\to\infty$ in \eqref{eq:rp} gives $r/p\to\rho_h$.
+
+The probability $\rho_h$ is positive: with positive probability the first $h$ steps of $X$ are $+1$ and the first $h$ steps of $Z$ are $-1$, and then no match is possible, because $X>-h$ always while $Z$ has passed all levels above $-h$. For the same reason only depths $j\le h-1$ can be matched, and each depth at most once, at time $\tau_j$. A match at depth $j$ at time $l$ has probability
+\[
+\PP(\tau_j=l)\,\PP(X_l=-j)=g_l(j)\,\frac{h-j}h\bigl(p_l(j)-p_l(2h-j)\bigr),
+\]
+where the second factor counts by reflection at $-h$ the paths of the simple symmetric walk from $0$ to $-j$ that avoid $-h$, and multiplies by the factor $(h-j)/h$ of the Doob transform. Summing over $l$ gives $H_h(j)$, the probability of a match at depth $j$. Given a match at depth $j$ at time $l$, the processes $X_{l+\cdot}+j$ and $Z_{l+\cdot}+j$ are independent, the second is a simple symmetric walk, and the first is the walk conditioned to stay above $-(h-j)$, because $x+h$ is the harmonic function $(x+j)+(h-j)$. Later matches of $X$ and $Z$ at depths $j'>j$ are matches of these processes at depth $j'-j$. So the conditional probability that the match at depth $j$ is the last is $\rho_{h-j}$. Splitting the event that some match occurs according to its last match gives $1-\rho_h=\sum_{j<h}H_h(j)\rho_{h-j}$, which is \eqref{eq:rho}. For $h=1$ no match is possible and $\rho_1=1$; indeed by \eqref{eq:overlap} the words in $\FP_{n,1}$ have no overlaps, and Lemma~\ref{lem:first} gives $p\,\EE T=1$ exactly.
+
+For $h=2$, \eqref{eq:rho} reads $\rho_2=1-H_2(1)$ with $H_2(1)=\frac12\sum_lg_l(1)(p_l(1)-p_l(3))=\frac12(\PP(V=1)-\PP(V=3))$, where $V=Y_{\tau_1}$ for a simple symmetric walk $Y$ independent of $Z$. The generating function $f(x)=\EE x^{\tau_1}$ satisfies $f=\frac x2(1+f^2)$, so $f(x)=(1-\sqrt{1-x^2})/x$, and $\EE e^{i\theta V}=f(\cos\theta)=(1-|\sin\theta|)/\cos\theta$, extended by continuity at $\theta=\pm\pi/2$. Since this is even and real,
+\[
+\PP(V=1)-\PP(V=3)=\frac1\pi\int_0^\pi\frac{1-\sin\theta}{\cos\theta}(\cos\theta-\cos3\theta)\,d\theta=\frac1\pi\int_0^\pi4\sin^2\theta(1-\sin\theta)\,d\theta=2-\frac{16}{3\pi},
+\]
+using $\cos\theta-\cos3\theta=4\sin^2\theta\cos\theta$. Hence $H_2(1)=1-8/(3\pi)$ and $\rho_2=8/(3\pi)$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:ends}(b)]
+Let $h/n\to\delta\in(0,1]$ and let $X$ be the drifted walk of the theorem. Conditioned on $S_n=-h$, the first $k$ steps of a uniformly chosen path are a sample without replacement from $(n+h)/2$ steps $-1$ and $(n-h)/2$ steps $+1$, and for fixed $k$ their law tends to that of $k$ steps of $X$. Conditioning further on first passage multiplies the probability of a prefix ending at $s>-h$ by $n(h+s)/(h(n-k))$, by the ballot count used for \eqref{eq:density}, and this tends to $1$ for fixed $k$ since $h\to\infty$. So the first $k$ steps of $w$ under $U$ converge in law to those of $X$.
+
+For the tail, given $S_n=-h$, Hoeffding's inequality for sampling without replacement \cite{Hoe63} gives $\PP(S_l>-hl/(2n)\mid S_n=-h)\le e^{-c_\delta l}$ for large $n$ and all $l<n$. The probability of first passage given $S_n=-h$ is $h/n$, so under $U$ this probability is at most $(n/h)e^{-c_\delta l}$. When $-w(l)\ge hl/(2n)$, Lemma~\ref{lem:g} gives $g_l(-w(l))\le(K/l)e^{-c'_\delta l}$. So the probability of a match at some time in $[k,n)$ is at most $K_\delta e^{-c''_\delta k}$, uniformly for large $n$, and the same bound holds for $X$ and $Z$. As in part~(a), $r/p$ tends to the probability that $X$ does not match $Z$.
+
+To compute it, let $0=\tau_0<\tau_1<\tau_2<\dots$ and $\Delta_j=X_{\tau_j}+j$. The times $\tau_j$ are finite because $Z$ is recurrent, the lengths $\tau_j-\tau_{j-1}$ are i.i.d., and given these lengths the increments of $X$ over the ladder intervals are independent with laws determined by the lengths. So $\Delta$ is a random walk in $j$, and the matches are its visits to $0$ at positive times. The expected number of visits to $0$, including $j=0$, is $1+\sum_{j\ge1}\sum_l\PP(\tau_j=l)\PP(X_l=-j)=G_\delta$, which is finite by the tail bound. By the strong Markov property at the visits to $0$, their number is geometric, and the probability of no visit at a positive time is $1/G_\delta$. For $\delta=1$, $X_l=-l$ and \eqref{eq:G} is $1+\sum_{l\ge1}p_l(l)=2$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:match}]
+Let $h\to\infty$ along the integers. For each $h$ choose $n_h\equiv h\pmod 2$ with $n_h\ge h^3$ so large that $|\rho_h\,p\,\EE T-1|\le1/h$ at $(n_h,h)$, which is possible by Theorem~\ref{thm:ends}(a). The sequence $(n_h,h)$ satisfies the hypotheses of Theorem~\ref{thm:main}, with $L_*=h^2$ because $n_h/h\ge h^2$. So $1/\rho_h\sim p\,\EE T\sim\log(h^2)/(2\pi)$.
+
+Let $\delta_k\downarrow0$. For each $k$ fix a sequence $(n,h)$ with $h/n\to\delta_k$, and choose from it a term with $n\ge\delta_k^{-4}$, $|h/(n\delta_k)-1|\le\delta_k$ and $|p\,\EE T/G_{\delta_k}-1|\le\delta_k$, which is possible by Theorem~\ref{thm:ends}(b). Along the chosen terms $h/n\to0$, $h\ge\delta_k^{-3}/2\to\infty$, and $L_*=(n/h)^2$, so Theorem~\ref{thm:main} gives $G_{\delta_k}\sim p\,\EE T\sim\log(\delta_k^{-2})/(2\pi)$. Since the sequence $\delta_k$ was arbitrary, the second claim follows.
+\end{proof}
+
+\subsection*{An exact recursion for the intensity}
+Write $r_{n,h}$ for the quantity $r$ of Section~\ref{sec:window} with $A=\FP_{n,h}$, the intensity of isolated occurrences. It satisfies an exact recursion.
+
+\begin{proposition}\label{prop:rec}
+For $1\le h\le n$ with $h\equiv n\pmod2$,
+\begin{equation}\label{eq:rec}
+r_{n,h}=g_n(h)\bigl(1-g_n(h)\bigr)-\sum_{l=1}^{n-1}\sum_{j=1}^{h-1}g_l(j)\bigl(p_l(j)-p_l(2h-j)\bigr)\,r_{n-l,h-j},
+\end{equation}
+where $r_{m,k}=g_m(k)=0$ unless $1\le k\le m$ and $k\equiv m\pmod2$.
+\end{proposition}
+
+\begin{proof}
+By \eqref{eq:future}, $g_n(h)-r_{n,h}$ is the probability of an occurrence at time $0$ and another at some time in $\{1,\dots,n\}$. Split according to the last such time $l$. For $l=n$ the two windows are disjoint and the probability is $g_n(h)^2$. Let $0<l<n$ and let $w$ be the word ending at $0$. By \eqref{eq:overlap}, an occurrence at time $l$ means that $w(l)=-j$ for some $1\le j<h$ and that the walk $Z$ after time $0$ first reaches $-j$ at time $l$. Then $w$ is in $\FP_{n,h}$ exactly when its first $l$ steps go from $0$ to $-j$ without reaching $-h$, which has probability $p_l(j)-p_l(2h-j)$, and its last $n-l$ steps form a word $w'\in\FP_{n-l,h-j}$. The window ending at time $l$ is $w'$ followed by $Z_1,\dots,Z_l$. For $0<k\le n-l$, applying \eqref{eq:overlap} to this window shows that there is an occurrence at time $l+k$ exactly when the steps after time $l$ first reach $w'(k)<0$ at time $k$, which is the condition for an occurrence of $\FP_{n-l,h-j}$ at lag $k$ after $w'$. So the event that $w'$ is in $\FP_{n-l,h-j}$ and there is no occurrence at times $l+1,\dots,n$ has probability $r_{n-l,h-j}$, by \eqref{eq:future} for the family $\FP_{n-l,h-j}$. The three events involve disjoint sets of steps, and summing over $l$ and $j$ gives \eqref{eq:rec}.
+\end{proof}
+
+For $h=1$ the recursion gives $r_{n,1}=g_n(1)\bigl(1-g_n(1)\bigr)$, while $p\,\EE T=1$ exactly, so $1/r$ and $\EE T$ differ at finite $n$; by Lemma~\ref{lem:window} the difference is at most $\EE T\,q/(1-q)\le2n/(1-q)$, since disjoint blocks of $2n$ steps give $\EE T\le2n/q$.
+
+\section{Numerical values}\label{sec:numerics}
+
+Table~\ref{tab:num} compares $p\,\EE T$ with the leading term $\log L_*/(2\pi)$ at $h=|\lambda_n|$, $\lambda=-1$, where $\lambda_n=\lfloor\lambda\sqrt n\rfloor$, increased by $1$ when its parity differs from that of $n$, as in \cite{Sh26}. The values of $\EE T$ are taken from \cite{Sh26}: exact rational values for $n\le12$ and Monte Carlo estimates with $95\%$ intervals for larger $n$, from between $200$ and $30{,}000$ independent runs each, as listed there. The column $p/r$ is computed from Proposition~\ref{prop:rec} in floating point.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{rrrrrrr}
+\toprule
+$n$ & $h$ & $\EE T$ & $p\,\EE T$ & $p/r$ & $\log L_*/(2\pi)$ & $p\,\EE T-\log L_*/(2\pi)$\\
+\midrule
+10 & 4 & 38.024010 & 1.782 & 1.983 & 0.292 & 1.491\\
+12 & 4 & 43.516365 & 1.753 & 1.934 & 0.350 & 1.403\\
+100 & 10 & 416.3 & 2.018 & 2.105 & 0.733 & 1.27 to 1.30\\
+1{,}000 & 32 & 4{,}946.3 & 2.394 & 2.459 & 1.096 & 1.27 to 1.32\\
+10{,}000 & 100 & 56{,}062 & 2.713 & -- & 1.466 & 1.20 to 1.30\\
+100{,}000 & 316 & 657{,}063 & 3.180 & -- & 1.832 & 1.18 to 1.52\\
+1{,}000{,}000 & 1000 & 7{,}812{,}672 & 3.781 & -- & 2.199 & 1.14 to 2.03\\
+\bottomrule
+\end{tabular}
+\caption{The waiting time for $\FP_{n,h}$, with $h$ the integer of the parity of $n$ nearest to $\sqrt n$. For $n\ge100$, $\EE T$ is a Monte Carlo mean and the last column gives the range implied by its $95\%$ interval. The column $p/r$ is given for $n\le1000$.}\label{tab:num}
+\end{table}
+
+For $n\ge100$ every interval in the last column contains $1.29$, and the intervals show no trend; Theorem~\ref{thm:main} only asserts that $p\,\EE T-\log L_*/(2\pi)$ is $o(\log n)$. The leading term is less than two thirds of $p\,\EE T$ even at $n=10^6$, which is why the simulated ratios $\EE T/(n\log n)$ in \cite{Sh26} decrease slowly towards $0.3289$. The recursion \eqref{eq:rho} gives $\rho_2=0.84883$, and the recursion \eqref{eq:rec} gives $r/p$ at $h=2$ converging to the same value.
+
+\section*{Acknowledgments and funding}
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's Horizon Europe research and innovation programme (grant agreement No.~101041711) and by the Simons Foundation as part of the Collaboration on the Mathematical and Scientific Foundations of Deep Learning. It was also supported by Heights Labs, by Convex Nexus Capital and by the Israel Science Foundation (ISF grants 2258/19 and 4101/25).
+
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}. The method is described in~\cite{MathBrainPaper}.
+
+\section*{Declaration of competing interest}
+
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital. These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+
+This paper is part of a broader research project on proving open problems with AI systems. The results, proofs and text were produced with generative AI systems. OpenAI's Codex found the proofs, and Anthropic's Claude (Opus~5.5) checked them and wrote the text. The question is due to Pitman and Tang \cite{PT}, and the order $n\log n$ was conjectured by Peres \cite{PTpub} and proved in \cite{Sh26}. The argument rests on the overlap identities of Li \cite{Li} and of Gerber and Li \cite{GL} and on the inequalities of McDiarmid \cite{McD89} and Hoeffding \cite{Hoe63}. Theorems~\ref{thm:main} and~\ref{thm:ends}, their corollaries, the density bound in Lemma~\ref{lem:first}, the concentration bound \eqref{eq:conc} and Lemmas~\ref{lem:transfer} and~\ref{lem:tail} are new. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Data and code availability}
+
+The script \texttt{check.py}, available at \url{https://github.com/yspennstate/first-passage-pattern-constant}, evaluates the recursion \eqref{eq:rec}, compares $1/r$ with exact values of $\EE T$ for small $n$ obtained by solving the linear system of the Markov chain on the last $n$ steps, computes $\rho_h$ from \eqref{eq:rho} and $G_1$ from \eqref{eq:G}, and reproduces Table~\ref{tab:num}.
+
+\begin{thebibliography}{99}
+\bibitem{Ald89} D.~Aldous, \emph{Probability Approximations via the Poisson Clumping Heuristic}, Applied Mathematical Sciences \textbf{77}, Springer, New York, 1989. doi:10.1007/978-1-4757-6283-9.
+\bibitem{AS11} M.~Abadi and B.~Saussol, \emph{Hitting and returning to rare events for all alpha-mixing processes}, Stochastic Process.\ Appl.\ \textbf{121} (2011), 314--323. doi:10.1016/j.spa.2010.11.001.
+\bibitem{AGG90} R.~Arratia, L.~Goldstein and L.~Gordon, \emph{Poisson approximation and the Chen--Stein method}, Statist.\ Sci.\ \textbf{5} (1990), 403--434. doi:10.1214/ss/1177012015.
+
+\bibitem{GL} H.~U.~Gerber and S.-Y.~R.~Li, \emph{The occurrence of sequence patterns in repeated experiments and hitting times in a Markov chain}, Stochastic Process.\ Appl.\ \textbf{11} (1981), 101--108. doi:10.1016/0304-4149(81)90025-9.
+\bibitem{GO} L.~J.~Guibas and A.~M.~Odlyzko, \emph{String overlaps, pattern matching, and nontransitive games}, J.\ Combin.\ Theory Ser.\ A \textbf{30} (1981), 183--208. doi:10.1016/0097-3165(81)90005-4.
+\bibitem{Hoe63} W.~Hoeffding, \emph{Probability inequalities for sums of bounded random variables}, J.\ Amer.\ Statist.\ Assoc.\ \textbf{58} (1963), 13--30. doi:10.1080/01621459.1963.10500830.
+\bibitem{Li} S.-Y.~R.~Li, \emph{A martingale approach to the study of occurrence of sequence patterns in repeated experiments}, Ann.\ Probab.\ \textbf{8} (1980), 1171--1176. doi:10.1214/aop/1176994578.
+\bibitem{McD89} C.~McDiarmid, \emph{On the method of bounded differences}, in: Surveys in Combinatorics, 1989, London Math.\ Soc.\ Lecture Note Ser.\ \textbf{141}, Cambridge Univ.\ Press, 1989, 148--188. doi:10.1017/CBO9781107359949.008.
+\bibitem{PT} J.~Pitman and W.~Tang, \emph{Patterns in random walks and Brownian motion}, preprint, arXiv:1411.0041v3, 2015.
+\bibitem{PTpub} J.~Pitman and W.~Tang, \emph{Patterns in random walks and Brownian motion}, in: In Memoriam Marc Yor -- S\'eminaire de Probabilit\'es XLVII, Lecture Notes in Math.\ \textbf{2137}, Springer, Cham, 2015, 49--88. doi:10.1007/978-3-319-18585-9\_4.
+\bibitem{Sh26} Y.~Shmalo, \emph{The waiting time for a first-passage pattern in simple random walk}, preprint, 2026. doi:10.5281/zenodo.24237877.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain}, public repository, 2026, \url{https://github.com/yspennstate/math-brain-public/tree/8c9a6bd478c4ec4082347151b7ae16db50c917dd}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research}, October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}, doi:10.5281/zenodo.24150837.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026, \url{https://github.com/yspennstate/brain-framework-public/tree/5629e644cdd510173ae97e9aa92642dabd22dc57}.
+\end{thebibliography}
+
+\end{document}
