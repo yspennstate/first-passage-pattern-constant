@@ -44,9 +44,9 @@ is the first time at which the last $n$ steps of the walk form a word in $A$. Fo
 \[
 \FP_{n,h}=\{w:\ w(n)=-h,\ w(i)>-h\text{ for }0\le i<n\},\qquad 1\le h\le n,\ h\equiv n\pmod 2.
 \]
-For $\lambda<0$ and $h=|\lambda_n|$, where $\lambda_n$ is the integer of the parity of $n$ obtained by rounding $\lambda\sqrt n$ as in \cite{PT}, they proved $c\,n\le\EE T(\FP_{n,h})\le c'\,n^{5/4}$ for constants $0<c<c'$ \cite[Theorem~1.8(4)]{PT}, and asked for its exact asymptotics \cite[Open Problem~2.3(2)]{PT} (Open Problem~1(2) in the published version \cite{PTpub}). Peres conjectured that $\EE T$ is of order $n\log n$ \cite[Conjecture~1]{PTpub}. For fixed $\lambda<0$ in this regime there are constants $0<c_1<c_2$ with
+For $\lambda<0$ let $\lambda_n=\lfloor\lambda\sqrt n\rfloor$, increased by $1$ when its parity differs from that of $n$, as in \cite{Sh26}. For $h=|\lambda_n|$ Pitman and Tang proved $c\,n\le\EE T(\FP_{n,h})\le c'\,n^{5/4}$ for constants $0<c<c'$ \cite[Theorem~1.8]{PT}, and asked for its exact asymptotics \cite[Open Problem~2.3(2)]{PT} (Open Problem~1(2) in the published version \cite{PTpub}). Peres conjectured that $\EE T(\FP_{n,h})$ is of order $n\log n$ \cite[Conjecture~1]{PTpub}. For fixed $\lambda<0$ in this regime there are constants $0<c_1<c_2$ with
 \[
-c_1\,n\log n\le\EE T\le c_2\,n\log n
+c_1\,n\log n\le\EE T(\FP_{n,h})\le c_2\,n\log n
 \]
 for all large $n$, as shown in \cite[Theorem~1.1 and the paragraph following it]{Sh26}; whether $\EE T/(n\log n)$ converges remained open. There the probability that a block of about $3n/2$ steps contains an occurrence is bounded above through the range of the walk at its descending ladder times \cite[Lemma~4.1]{Sh26} and below through a count of overlaps \cite[Lemma~4.3]{Sh26}; the two bounds come from different arguments, and their constants do not meet. We determine the constant for every $h$ with $h\to\infty$ and $h/n\to0$, and also when $h$ is fixed and when $h/n\to\delta>0$. The question of Pitman and Tang concerns $h$ of order $\sqrt n$.
 
@@ -80,7 +80,7 @@ Let $n\to\infty$ and $h=h(n)$ with $h\equiv n\pmod2$, $h\to\infty$ and $h/n\to0$
 Since $p_n(h)\sim\sqrt{2/(\pi n)}\,e^{-h^2/(2n)}$ when $h=O(\sqrt n)$ and $h\equiv n\pmod 2$, the case of $h$ of order $\sqrt n$ reads as follows. It answers the first-passage part of the question of Pitman and Tang.
 
 \begin{corollary}\label{cor:diff}
-Let $\lambda<0$. If $h/\sqrt n\to|\lambda|$, then
+Let $\lambda<0$. If $h\equiv n\pmod2$ and $h/\sqrt n\to|\lambda|$, then
 \[
 \EE T\sim\frac{e^{\lambda^2/2}}{2\sqrt{2\pi}\,|\lambda|}\,n\log n.
 \]
@@ -97,7 +97,7 @@ The two regimes not covered by Theorem~\ref{thm:main}, bounded $h$ and $h/n\to\d
 \rho_h=1-\sum_{j=1}^{h-1}H_h(j)\,\rho_{h-j},\qquad H_h(j)=\frac{h-j}{h}\sum_{l\ge1}\frac jl\,p_l(j)\bigl(p_l(j)-p_l(2h-j)\bigr),
 \end{equation}
 and $\rho_2=8/(3\pi)$.
-\item[(b)] Let $h/n\to\delta\in(0,1]$. Then $p\,\EE T\to G_\delta$ and $T/\EE T\Rightarrow\mathrm{Exp}(1)$, where $1/G_\delta$ is the probability that $Z$ is not matched by the random walk $X$ with steps $-1$ and $+1$ of probabilities $(1+\delta)/2$ and $(1-\delta)/2$, and
+\item[(b)] Let $h\equiv n\pmod2$ and $h/n\to\delta\in(0,1]$. Then $p\,\EE T\to G_\delta$ and $T/\EE T\Rightarrow\mathrm{Exp}(1)$, where $1/G_\delta$ is the probability that $Z$ is not matched by the random walk $X$ with steps $-1$ and $+1$ of probabilities $(1+\delta)/2$ and $(1-\delta)/2$, and
 \begin{equation}\label{eq:G}
 G_\delta=1+\sum_{l\ge1}\sum_{j\ge1}\PP(X_l=-j)\,\frac jl\,p_l(j).
 \end{equation}
@@ -112,7 +112,7 @@ As $h\to\infty$, $\rho_h\log h\to\pi$, and as $\delta\downarrow0$, $G_\delta/\lo
 So $1/\rho_h\sim\log(h^2)/(2\pi)$ and $G_\delta\sim\log(\delta^{-2})/(2\pi)$, which are the values of $\log L_*/(2\pi)$ at the two ends of the range of Theorem~\ref{thm:main}.
 
 \subsection*{Method}
-An exponential tilt, under which $U$ is a conditioned walk, and a ballot formula carry the bound of Lemma~\ref{lem:conc} to $U$ up to the length $L_*$, and under $U$ the remainder $\sum_{L_*<l<n}g_l(-w(l))$ has an exponential tail (Lemmas~\ref{lem:transfer} and~\ref{lem:tail}). For the end regimes we use instead a comparison, valid for any family of words in an i.i.d.\ sequence, between $\EE T$ and the intensity $r$ of isolated occurrences, the occurrences preceded by $n$ non-occurrences (Lemma~\ref{lem:window}).
+An exponential tilt, under which $U$ is a conditioned walk, and a ballot count carry the bound of Lemma~\ref{lem:conc} to $U$ up to the length $L_*$, and under $U$ the remainder $\sum_{L_*<l<n}g_l(-w(l))$ has an exponential tail (Lemmas~\ref{lem:transfer} and~\ref{lem:tail}). For the end regimes we use instead a comparison, valid for any family of words in an i.i.d.\ sequence, between $\EE T$ and the intensity $r$ of isolated occurrences, the occurrences preceded by $n$ non-occurrences (Lemma~\ref{lem:window}).
 
 Section~\ref{sec:prelim} collects estimates for $g_l$. Section~\ref{sec:first} proves the identity $p\,\EE T=\EE_\mu C$ and the density bound, Section~\ref{sec:conc} the concentration, Section~\ref{sec:prefix} the transfer and the tail, and Section~\ref{sec:proof} Theorem~\ref{thm:main}. Section~\ref{sec:window} proves the comparison lemma, Section~\ref{sec:ends} Theorem~\ref{thm:ends} and Corollary~\ref{cor:match}, together with an exact recursion for the intensity, and Section~\ref{sec:numerics} gives numerical values.
 
@@ -154,6 +154,7 @@ d_l(b+2)-d_l(b)=\tfrac12\bigl(2p_{l-1}(b+1)-p_{l-1}(b-1)-p_{l-1}(b+3)\bigr)=\fra
 \]
 The absolute value is at most $\frac1\pi\int_{-\pi}^{\pi}\sin^2t\,|\cos t|^{l-1}dt=\frac4\pi\int_0^{\pi/2}\sin^2t\cos^{l-1}t\,dt$. For $l\ge2$, using $\sin t\le t$ and $\cos t\le e^{-t^2/2}$ on $[0,\pi/2]$, this is at most $\frac4\pi\int_0^\infty t^2e^{-(l-1)t^2/2}dt=\frac{2\sqrt{2\pi}}{\pi}(l-1)^{-3/2}\le Kl^{-3/2}$. For $l=1$ the bound is trivial.
 \end{proof}
+From here on $c,K,K',\dots$ denote positive absolute constants whose values may change from line to line.
 
 \section{The first occurrence}\label{sec:first}
 
@@ -336,7 +337,7 @@ By \eqref{eq:future}, $r/p$ is the probability that there is no occurrence at th
 \end{equation}
 
 \begin{proof}[Proof of Theorem~\ref{thm:ends}(a)]
-Let $h$ be fixed. For a fixed $k$ and a fixed prefix $(w(0),\dots,w(k))$ staying above $-h$ and ending at $s$, the ballot count used for \eqref{eq:density}, applied with $Q$ the law of $S$, gives
+Let $h$ be fixed. For a fixed $k$ and a fixed prefix $(w(0),\dots,w(k))$ staying above $-h$ and ending at $s$, the ballot count used for \eqref{eq:density}, applied with the law of $S$ in place of $Q$, gives
 \[
 U(\text{prefix})=2^{-k}\,\frac{n(h+s)}{h(n-k)}\,\frac{p_{n-k}(h+s)}{p_n(h)}\to2^{-k}\,\frac{h+s}h
 \]
@@ -360,7 +361,7 @@ Let $h/n\to\delta\in(0,1]$ and let $X$ be the drifted walk of the theorem. Condi
 
 For the tail, given $S_n=-h$, Hoeffding's inequality for sampling without replacement \cite{Hoe63} gives $\PP(S_l>-hl/(2n)\mid S_n=-h)\le e^{-c_\delta l}$ for large $n$ and all $l<n$. The probability of first passage given $S_n=-h$ is $h/n$, so under $U$ this probability is at most $(n/h)e^{-c_\delta l}$. When $-w(l)\ge hl/(2n)$, Lemma~\ref{lem:g} gives $g_l(-w(l))\le(K/l)e^{-c'_\delta l}$. So the probability of a match at some time in $[k,n)$ is at most $K_\delta e^{-c''_\delta k}$, uniformly for large $n$, and the same bound holds for $X$ and $Z$. As in part~(a), $r/p$ tends to the probability that $X$ does not match $Z$.
 
-To compute it, let $0=\tau_0<\tau_1<\tau_2<\dots$ and $\Delta_j=X_{\tau_j}+j$. The times $\tau_j$ are finite because $Z$ is recurrent, the lengths $\tau_j-\tau_{j-1}$ are i.i.d., and given these lengths the increments of $X$ over the ladder intervals are independent with laws determined by the lengths. So $\Delta$ is a random walk in $j$, and the matches are its visits to $0$ at positive times. The expected number of visits to $0$, including $j=0$, is $1+\sum_{j\ge1}\sum_l\PP(\tau_j=l)\PP(X_l=-j)=G_\delta$, which is finite by the tail bound. By the strong Markov property at the visits to $0$, their number is geometric, and the probability of no visit at a positive time is $1/G_\delta$. For $\delta=1$, $X_l=-l$ and \eqref{eq:G} is $1+\sum_{l\ge1}p_l(l)=2$.
+To compute it, let $0=\tau_0<\tau_1<\tau_2<\dots$ and $\Delta_j=X_{\tau_j}+j$. The times $\tau_j$ are finite because $Z$ is recurrent, the lengths $\tau_j-\tau_{j-1}$ are i.i.d., and given these lengths the increments of $X$ over the intervals $(\tau_{j-1},\tau_j]$ are independent with laws determined by the lengths. So $\Delta$ is a random walk in $j$, and the matches are its visits to $0$ at positive times. The expected number of visits to $0$, including $j=0$, is $1+\sum_{j\ge1}\sum_l\PP(\tau_j=l)\PP(X_l=-j)=G_\delta$, which is finite by the tail bound. By the strong Markov property at the visits to $0$, their number is geometric, and the probability of no visit at a positive time is $1/G_\delta$. For $\delta=1$, $X_l=-l$ and \eqref{eq:G} is $1+\sum_{l\ge1}p_l(l)=2$.
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:match}]
@@ -388,7 +389,7 @@ For $h=1$ the recursion gives $r_{n,1}=g_n(1)\bigl(1-g_n(1)\bigr)$, while $p\,\E
 
 \section{Numerical values}\label{sec:numerics}
 
-Table~\ref{tab:num} compares $p\,\EE T$ with the leading term $\log L_*/(2\pi)$ at $h=|\lambda_n|$, $\lambda=-1$, where $\lambda_n=\lfloor\lambda\sqrt n\rfloor$, increased by $1$ when its parity differs from that of $n$, as in \cite{Sh26}. The values of $\EE T$ are taken from \cite{Sh26}: exact rational values for $n\le12$ and Monte Carlo estimates with $95\%$ intervals for larger $n$, from between $200$ and $30{,}000$ independent runs each, as listed there. The column $p/r$ is computed from Proposition~\ref{prop:rec} in floating point.
+Table~\ref{tab:num} compares $p\,\EE T$ with the leading term $\log L_*/(2\pi)$ at $h=|\lambda_n|$ for $\lambda=-1$, with $\lambda_n$ as in the introduction. The values of $\EE T$ are taken from \cite{Sh26}: exact rational values for $n\le12$ and Monte Carlo estimates with $95\%$ intervals for larger $n$, from between $200$ and $30{,}000$ independent runs each, as listed there. The column $p/r$ is computed from Proposition~\ref{prop:rec} in floating point.
 
 \begin{table}[h]
 \centering
@@ -405,7 +406,7 @@ $n$ & $h$ & $\EE T$ & $p\,\EE T$ & $p/r$ & $\log L_*/(2\pi)$ & $p\,\EE T-\log L_
 1{,}000{,}000 & 1000 & 7{,}812{,}672 & 3.781 & -- & 2.199 & 1.14 to 2.03\\
 \bottomrule
 \end{tabular}
-\caption{The waiting time for $\FP_{n,h}$, with $h$ the integer of the parity of $n$ nearest to $\sqrt n$. For $n\ge100$, $\EE T$ is a Monte Carlo mean and the last column gives the range implied by its $95\%$ interval. The column $p/r$ is given for $n\le1000$.}\label{tab:num}
+\caption{The waiting time for $\FP_{n,h}$, with $h=|\lambda_n|$ for $\lambda=-1$. For $n\ge100$, $\EE T$ is a Monte Carlo mean and the last column gives the range implied by its $95\%$ interval. The column $p/r$ is given for $n\le1000$.}\label{tab:num}
 \end{table}
 
 For $n\ge100$ every interval in the last column contains $1.29$, and the intervals show no trend; Theorem~\ref{thm:main} only asserts that $p\,\EE T-\log L_*/(2\pi)$ is $o(\log n)$. The leading term is less than two thirds of $p\,\EE T$ even at $n=10^6$, which is why the simulated ratios $\EE T/(n\log n)$ in \cite{Sh26} decrease slowly towards $0.3289$. The recursion \eqref{eq:rho} gives $\rho_2=0.84883$, and the recursion \eqref{eq:rec} gives $r/p$ at $h=2$ converging to the same value.
@@ -422,7 +423,7 @@ The author holds equity in Heights Labs and in Convex Nexus Capital and has a ma
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 
-This paper is part of a broader research project on proving open problems with AI systems. The results, proofs and text were produced with generative AI systems. OpenAI's Codex found the proofs, and Anthropic's Claude (Opus~5.5) checked them and wrote the text. The question is due to Pitman and Tang \cite{PT}, and the order $n\log n$ was conjectured by Peres \cite{PTpub} and proved in \cite{Sh26}. The argument rests on the overlap identities of Li \cite{Li} and of Gerber and Li \cite{GL} and on the inequalities of McDiarmid \cite{McD89} and Hoeffding \cite{Hoe63}. Theorems~\ref{thm:main} and~\ref{thm:ends}, their corollaries, the density bound in Lemma~\ref{lem:first}, the concentration bound \eqref{eq:conc} and Lemmas~\ref{lem:transfer} and~\ref{lem:tail} are new. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+This paper is part of a broader research project on proving open problems with AI systems. The results, proofs and text were produced with generative AI systems. OpenAI's Codex found the proofs, and Anthropic's Claude (Opus~5.5) checked them and wrote the text. The question is due to Pitman and Tang \cite{PT}, and the order $n\log n$ was conjectured by Peres \cite{PTpub} and proved in \cite{Sh26}. The argument rests on the linear system of Li \cite{Li} and of Gerber and Li \cite{GL} and on the inequalities of McDiarmid \cite{McD89} and Hoeffding \cite{Hoe63}. Theorems~\ref{thm:main} and~\ref{thm:ends}, their corollaries, the density bound in Lemma~\ref{lem:first}, the concentration bound \eqref{eq:conc} and Lemmas~\ref{lem:transfer} and~\ref{lem:tail} are new. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
 
 \section*{Data and code availability}
 
